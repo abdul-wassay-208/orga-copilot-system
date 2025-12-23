@@ -1,0 +1,13 @@
+package com.vinncorp.orga;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class OrgaApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}

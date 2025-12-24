@@ -15,6 +15,9 @@ public class User {
     private String email;
 
     @Column(nullable = false)
+    private String fullName;
+
+    @Column(nullable = false)
     private String passwordHash;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -34,6 +37,14 @@ public class User {
 
     public User(String email, String passwordHash, Tenant tenant) {
         this.email = email;
+        this.fullName = email.split("@")[0]; // Default to email username if fullName not provided
+        this.passwordHash = passwordHash;
+        this.tenant = tenant;
+    }
+
+    public User(String email, String fullName, String passwordHash, Tenant tenant) {
+        this.email = email;
+        this.fullName = fullName;
         this.passwordHash = passwordHash;
         this.tenant = tenant;
     }
@@ -48,6 +59,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getPasswordHash() {

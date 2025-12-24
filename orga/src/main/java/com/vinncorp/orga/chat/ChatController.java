@@ -81,6 +81,15 @@ public class ChatController {
                     .orElseThrow(() -> new RuntimeException("Conversation not found"));
             // Ensure messages are loaded by accessing them
             conversation.getMessages().size(); // Trigger lazy loading
+            
+            // Update title if it's still "New Chat" and this is the first user message
+            if ("New Chat".equals(conversation.getTitle()) && conversation.getMessages().isEmpty()) {
+                String title = request.getMessage().length() > 50 
+                        ? request.getMessage().substring(0, 50) + "..." 
+                        : request.getMessage();
+                conversation.setTitle(title);
+                conversationRepository.save(conversation); // Save the updated title
+            }
         } else {
             // Create new conversation with first message as title
             String title = request.getMessage().length() > 50 

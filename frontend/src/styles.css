@@ -4,31 +4,85 @@
   box-sizing: border-box;
 }
 
+/* CSS Variables - Default (Dark) */
+:root {
+  --bg-primary: #020617;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #1e293b;
+  --bg-card: rgba(15, 23, 42, 0.9);
+  --bg-card-hover: rgba(15, 23, 42, 0.95);
+  --bg-input: #020617;
+  --bg-button: linear-gradient(to right, #38bdf8, #4f46e5);
+  --bg-button-secondary: transparent;
+  --text-primary: #e5e7eb;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --border-color: rgba(148, 163, 184, 0.2);
+  --border-color-strong: rgba(148, 163, 184, 0.3);
+  --shadow-sm: 0 2px 8px rgba(56, 189, 248, 0.2);
+  --shadow-md: 0 24px 70px rgba(15, 23, 42, 0.8);
+  --accent-color: #38bdf8;
+  --accent-hover: #60a5fa;
+  --error-bg: rgba(248, 113, 113, 0.1);
+  --error-border: rgba(248, 113, 113, 0.4);
+  --error-text: #fecaca;
+  --success-bg: rgba(34, 197, 94, 0.1);
+  --success-border: rgba(52, 211, 153, 0.4);
+  --success-text: #bbf7d0;
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  --bg-card: rgba(255, 255, 255, 0.95);
+  --bg-card-hover: rgba(249, 250, 251, 0.98);
+  --bg-input: #ffffff;
+  --bg-button: linear-gradient(to right, #38bdf8, #4f46e5);
+  --bg-button-secondary: transparent;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #6b7280;
+  --border-color: rgba(229, 231, 235, 0.8);
+  --border-color-strong: rgba(209, 213, 219, 0.8);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 24px 70px rgba(0, 0, 0, 0.15);
+  --accent-color: #2563eb;
+  --accent-hover: #1d4ed8;
+  --error-bg: rgba(254, 226, 226, 0.8);
+  --error-border: rgba(239, 68, 68, 0.4);
+  --error-text: #dc2626;
+  --success-bg: rgba(220, 252, 231, 0.8);
+  --success-border: rgba(34, 197, 94, 0.4);
+  --success-text: #16a34a;
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: var(--bg-primary, radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%));
-  color: var(--text-primary, #e5e7eb);
-  transition: background 0.3s, color 0.3s;
-}
-
-[data-theme="light"] body {
-  background: #f9fafb;
-  color: #111827;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 [data-theme="dark"] body {
   background: radial-gradient(circle at top, #1f2937 0, #020617 55%, #000 100%);
-  color: #e5e7eb;
+}
+
+[data-theme="light"] body {
+  background: var(--bg-secondary);
 }
 
 a {
-  color: #38bdf8;
+  color: var(--accent-color);
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 a:hover {
   text-decoration: underline;
+  color: var(--accent-hover);
 }
 
 .auth-container {
@@ -42,11 +96,12 @@ a:hover {
 .auth-card {
   width: 100%;
   max-width: 420px;
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--bg-card);
   border-radius: 1rem;
   padding: 2rem 2.5rem;
-  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .auth-card h1 {
@@ -56,7 +111,7 @@ a:hover {
 
 .subtitle {
   margin: 0 0 1.5rem;
-  color: #9ca3af;
+  color: var(--text-secondary);
   font-size: 0.95rem;
 }
 
@@ -68,7 +123,7 @@ a:hover {
 
 .auth-form label {
   font-size: 0.85rem;
-  color: #e5e7eb;
+  color: var(--text-primary);
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -77,13 +132,14 @@ a:hover {
 .auth-form input {
   padding: 0.6rem 0.8rem;
   border-radius: 0.6rem;
-  border: 1px solid #4b5563;
-  background: #020617;
-  color: #e5e7eb;
+  border: 1px solid var(--border-color-strong);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .auth-form input:focus {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid var(--accent-color);
   outline-offset: 1px;
   border-color: transparent;
 }
@@ -92,11 +148,17 @@ button {
   border: none;
   border-radius: 0.6rem;
   padding: 0.7rem 1rem;
-  background: linear-gradient(to right, #38bdf8, #4f46e5);
+  background: var(--bg-button);
   color: white;
   font-weight: 600;
   cursor: pointer;
   margin-top: 0.5rem;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+button:hover:not([disabled]) {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
 
 button[disabled] {
@@ -105,33 +167,41 @@ button[disabled] {
 }
 
 .secondary-button {
-  background: transparent;
-  border: 1px solid #4b5563;
+  background: var(--bg-button-secondary);
+  border: 1px solid var(--border-color-strong);
   padding-inline: 0.9rem;
+  color: var(--text-primary);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.secondary-button:hover:not([disabled]) {
+  background: var(--bg-tertiary);
 }
 
 .error-text {
-  color: #fecaca;
-  background: rgba(248, 113, 113, 0.1);
-  border: 1px solid rgba(248, 113, 113, 0.4);
+  color: var(--error-text);
+  background: var(--error-bg);
+  border: 1px solid var(--error-border);
   padding: 0.5rem 0.75rem;
   border-radius: 0.6rem;
   font-size: 0.8rem;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .success-text {
-  color: #bbf7d0;
-  background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(52, 211, 153, 0.4);
+  color: var(--success-text);
+  background: var(--success-bg);
+  border: 1px solid var(--success-border);
   padding: 0.5rem 0.75rem;
   border-radius: 0.6rem;
   font-size: 0.8rem;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .switch-link {
   margin-top: 1.25rem;
   font-size: 0.85rem;
-  color: #9ca3af;
+  color: var(--text-secondary);
   text-align: center;
 }
 
@@ -146,9 +216,10 @@ button[disabled] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  border-bottom: 1px solid var(--border-color);
   backdrop-filter: blur(12px);
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--bg-card);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .chat-header h1 {
@@ -160,16 +231,17 @@ button[disabled] {
 
 .sidebar-toggle {
   background: transparent;
-  border: 1px solid #4b5563;
-  color: #e5e7eb;
+  border: 1px solid var(--border-color-strong);
+  color: var(--text-primary);
   padding: 0.5rem 0.75rem;
   font-size: 1.2rem;
   margin: 0;
   cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .sidebar-toggle:hover {
-  background: rgba(148, 163, 184, 0.1);
+  background: var(--bg-tertiary);
 }
 
 .chat-container {
@@ -180,22 +252,24 @@ button[disabled] {
 
 .chat-sidebar {
   width: 280px;
-  background: rgba(15, 23, 42, 0.95);
-  border-right: 1px solid rgba(148, 163, 184, 0.2);
+  background: var(--bg-card-hover);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .new-chat-button {
   margin: 1rem;
   padding: 0.75rem;
-  background: linear-gradient(to right, #38bdf8, #4f46e5);
+  background: var(--bg-button);
   color: white;
   font-weight: 600;
   border-radius: 0.6rem;
   cursor: pointer;
   border: none;
+  transition: opacity 0.2s ease;
 }
 
 .new-chat-button:hover {
@@ -210,7 +284,7 @@ button[disabled] {
 .conversations-list h3 {
   margin: 0.5rem 0.75rem;
   font-size: 0.9rem;
-  color: #9ca3af;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -226,21 +300,26 @@ button[disabled] {
   margin: 0.25rem 0;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s ease;
 }
 
 .conversations-list li:hover {
-  background: rgba(148, 163, 184, 0.1);
+  background: var(--bg-tertiary);
 }
 
 .conversations-list li.active {
-  background: rgba(56, 189, 248, 0.2);
-  border: 1px solid rgba(56, 189, 248, 0.4);
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+[data-theme="light"] .conversations-list li.active {
+  background: rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba(37, 99, 235, 0.3);
 }
 
 .conv-title {
   font-size: 0.9rem;
-  color: #e5e7eb;
+  color: var(--text-primary);
   margin-bottom: 0.25rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -249,7 +328,7 @@ button[disabled] {
 
 .conv-meta {
   font-size: 0.75rem;
-  color: #9ca3af;
+  color: var(--text-secondary);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -279,7 +358,7 @@ button[disabled] {
 .empty-text {
   padding: 1rem;
   text-align: center;
-  color: #9ca3af;
+  color: var(--text-secondary);
   font-size: 0.85rem;
 }
 
@@ -296,8 +375,8 @@ button[disabled] {
   flex: 1;
   border-radius: 1rem;
   padding: 1.5rem;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-strong);
   overflow-y: auto;
   overflow-x: hidden;
   display: flex;
@@ -307,12 +386,13 @@ button[disabled] {
   max-height: 100%;
   /* Remove smooth scroll for instant scrolling like ChatGPT */
   scroll-behavior: auto;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .chat-empty {
   margin: auto;
   text-align: center;
-  color: #9ca3af;
+  color: var(--text-secondary);
 }
 
 .chat-bubble {
@@ -347,9 +427,9 @@ button[disabled] {
 }
 
 .action-button {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-tertiary);
   border: none;
-  color: inherit;
+  color: var(--text-primary);
   padding: 0.25rem 0.4rem;
   border-radius: 0.3rem;
   cursor: pointer;
@@ -358,10 +438,19 @@ button[disabled] {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .action-button:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--bg-card);
+}
+
+[data-theme="light"] .action-button {
+  background: var(--bg-tertiary);
+}
+
+[data-theme="light"] .action-button:hover {
+  background: var(--border-color);
 }
 
 .chat-bubble.from-user {
@@ -374,10 +463,17 @@ button[disabled] {
 
 .chat-bubble.from-bot {
   align-self: flex-start;
-  background: rgba(30, 41, 59, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
   border-bottom-left-radius: 0.1rem;
   backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] .chat-bubble.from-bot {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
 }
 
 .message-content {
@@ -404,8 +500,9 @@ button[disabled] {
 
 .markdown-content h1 {
   font-size: 1.5em;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 0.5em;
+  transition: border-color 0.3s ease;
 }
 
 .markdown-content h2 {
@@ -455,21 +552,27 @@ button[disabled] {
 }
 
 .markdown-content code {
-  background: rgba(0, 0, 0, 0.3);
+  background: var(--bg-tertiary);
   padding: 0.2em 0.4em;
   border-radius: 0.3em;
   font-size: 0.9em;
   font-family: 'Courier New', monospace;
-  color: #38bdf8;
+  color: var(--accent-color);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="light"] .markdown-content code {
+  background: var(--bg-tertiary);
 }
 
 .markdown-content pre {
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--bg-tertiary);
   padding: 1em;
   border-radius: 0.5em;
   overflow-x: auto;
   margin: 1em 0;
-  border: 1px solid rgba(148, 163, 184, 0.2);
+  border: 1px solid var(--border-color);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .markdown-content pre code {
@@ -480,27 +583,31 @@ button[disabled] {
 }
 
 .markdown-content blockquote {
-  border-left: 3px solid rgba(56, 189, 248, 0.5);
+  border-left: 3px solid var(--accent-color);
   padding-left: 1em;
   margin: 1em 0;
-  color: rgba(148, 163, 184, 0.9);
+  color: var(--text-secondary);
   font-style: italic;
+  opacity: 0.9;
+  transition: border-color 0.3s ease, color 0.3s ease;
 }
 
 .markdown-content hr {
   border: none;
-  border-top: 1px solid rgba(148, 163, 184, 0.3);
+  border-top: 1px solid var(--border-color);
   margin: 1.5em 0;
+  transition: border-color 0.3s ease;
 }
 
 .markdown-content a {
-  color: #38bdf8;
+  color: var(--accent-color);
   text-decoration: underline;
   text-underline-offset: 2px;
+  transition: color 0.3s ease;
 }
 
 .markdown-content a:hover {
-  color: #60a5fa;
+  color: var(--accent-hover);
 }
 
 .markdown-content table {
@@ -511,14 +618,16 @@ button[disabled] {
 
 .markdown-content table th,
 .markdown-content table td {
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  border: 1px solid var(--border-color);
   padding: 0.5em;
   text-align: left;
+  transition: border-color 0.3s ease;
 }
 
 .markdown-content table th {
-  background: rgba(148, 163, 184, 0.1);
+  background: var(--bg-tertiary);
   font-weight: 600;
+  transition: background 0.3s ease;
 }
 
 /* Typing Indicator */
@@ -532,8 +641,10 @@ button[disabled] {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(148, 163, 184, 0.6);
+  background: var(--text-secondary);
+  opacity: 0.6;
   animation: typing 1.4s infinite;
+  transition: background 0.3s ease;
 }
 
 .typing-indicator span:nth-child(2) {
@@ -571,13 +682,14 @@ button[disabled] {
   flex: 1;
   padding: 0.6rem 0.8rem;
   border-radius: 0.7rem;
-  border: 1px solid #4b5563;
-  background: #020617;
-  color: #e5e7eb;
+  border: 1px solid var(--border-color-strong);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .chat-input-row input:focus {
-  outline: 2px solid #38bdf8;
+  outline: 2px solid var(--accent-color);
   outline-offset: 1px;
   border-color: transparent;
 }
@@ -614,9 +726,10 @@ button[disabled] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  border-bottom: 1px solid var(--border-color);
   backdrop-filter: blur(12px);
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--bg-card);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .admin-header h1 {
@@ -632,34 +745,40 @@ button[disabled] {
 
 .admin-nav {
   width: 200px;
-  background: rgba(15, 23, 42, 0.95);
-  border-right: 1px solid rgba(148, 163, 184, 0.2);
+  background: var(--bg-card-hover);
+  border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   padding: 1rem 0;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .admin-nav button {
   padding: 0.75rem 1rem;
   background: transparent;
   border: none;
-  color: #9ca3af;
+  color: var(--text-secondary);
   text-align: left;
   cursor: pointer;
   margin: 0.25rem 0;
   border-radius: 0;
   margin-top: 0;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
 .admin-nav button:hover {
-  background: rgba(148, 163, 184, 0.1);
-  color: #e5e7eb;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 .admin-nav button.active {
-  background: rgba(56, 189, 248, 0.2);
-  color: #38bdf8;
-  border-left: 3px solid #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent-color);
+  border-left: 3px solid var(--accent-color);
+}
+
+[data-theme="light"] .admin-nav button.active {
+  background: rgba(37, 99, 235, 0.1);
 }
 
 .admin-main {
@@ -684,16 +803,24 @@ button[disabled] {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  color: #e5e7eb;
+  color: var(--text-primary);
 }
 
 .admin-form input,
 .admin-form textarea {
   padding: 0.6rem 0.8rem;
   border-radius: 0.6rem;
-  border: 1px solid #4b5563;
-  background: #020617;
-  color: #e5e7eb;
+  border: 1px solid var(--border-color-strong);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 1px;
+  border-color: transparent;
 }
 
 .admin-table {
@@ -706,18 +833,19 @@ button[disabled] {
 .admin-table td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  border-bottom: 1px solid var(--border-color);
+  transition: border-color 0.3s ease;
 }
 
 .admin-table th {
-  color: #9ca3af;
+  color: var(--text-secondary);
   font-weight: 600;
   text-transform: uppercase;
   font-size: 0.85rem;
 }
 
 .admin-table td {
-  color: #e5e7eb;
+  color: var(--text-primary);
 }
 
 .danger-button {
@@ -737,16 +865,17 @@ button[disabled] {
 }
 
 .metric-card {
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color-strong);
   border-radius: 0.75rem;
   padding: 1.5rem;
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .metric-card h3 {
   margin: 0 0 0.5rem;
   font-size: 0.9rem;
-  color: #9ca3af;
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -754,7 +883,7 @@ button[disabled] {
 .metric-value {
   font-size: 2rem;
   font-weight: 600;
-  color: #38bdf8;
+  color: var(--accent-color);
   margin: 0;
 }
 
@@ -767,37 +896,27 @@ button[disabled] {
 .plan-buttons button {
   flex: 1;
   padding: 0.5rem;
-  background: rgba(148, 163, 184, 0.1);
-  border: 1px solid #4b5563;
-  color: #9ca3af;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color-strong);
+  color: var(--text-secondary);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
 }
 
 .plan-buttons button.active {
-  background: rgba(56, 189, 248, 0.2);
-  border-color: #38bdf8;
-  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+[data-theme="light"] .plan-buttons button.active {
+  background: rgba(37, 99, 235, 0.1);
 }
 
 .users-list {
   margin-top: 1rem;
 }
 
-/* Theme support */
-[data-theme="light"] {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f9fafb;
-  --text-primary: #111827;
-  --text-secondary: #6b7280;
-  --border-color: #e5e7eb;
-}
-
-[data-theme="dark"] {
-  --bg-primary: #020617;
-  --bg-secondary: #0f172a;
-  --text-primary: #e5e7eb;
-  --text-secondary: #9ca3af;
-  --border-color: #374151;
-}
+/* Theme support - Variables are defined at the top */
 
 /* Suggested Prompts */
 .suggested-prompts {
@@ -826,11 +945,11 @@ button[disabled] {
   background: rgba(56, 189, 248, 0.1);
   border: 1px solid rgba(56, 189, 248, 0.3);
   border-radius: 0.6rem;
-  color: #38bdf8;
+  color: var(--accent-color);
   cursor: pointer;
   font-size: 0.85rem;
   text-align: left;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   margin: 0;
 }
 
@@ -838,6 +957,17 @@ button[disabled] {
   background: rgba(56, 189, 248, 0.2);
   border-color: rgba(56, 189, 248, 0.5);
   transform: translateY(-2px);
+}
+
+[data-theme="light"] .prompt-button {
+  background: rgba(37, 99, 235, 0.08);
+  border-color: rgba(37, 99, 235, 0.25);
+  color: var(--accent-color);
+}
+
+[data-theme="light"] .prompt-button:hover {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: rgba(37, 99, 235, 0.4);
 }
 
 @media (max-width: 640px) {

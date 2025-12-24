@@ -68,10 +68,16 @@ public class AuthController {
                 });
 
         String hashed = passwordEncoder.encode(request.getPassword());
-        User user = new User(request.getEmail(), hashed, tenant);
+        User user = new User(request.getEmail(), request.getFullName(), hashed, tenant);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new AuthResponse(null, "User created successfully"));
+        // Generate token and return it (auto-login after signup)
+        String token = jwtUtil.generateToken(request.getEmail());
+        return ResponseEntity.ok(Map.of(
+                "token", token,
+                "message", "User created successfully",
+                "email", user.getEmail()
+        ));
     }
 
     /**

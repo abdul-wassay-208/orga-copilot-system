@@ -64,10 +64,24 @@ public class TenantAdminController {
         }
 
         String password = request.getOrDefault("password", "TempPassword123!");
+        String fullName = request.getOrDefault("fullName", email.split("@")[0]);
+        String roleStr = request.getOrDefault("role", "EMPLOYEE");
         String hashed = passwordEncoder.encode(password);
         
-        User newUser = new User(email, hashed, tenant);
-        newUser.setRole(UserRole.EMPLOYEE);
+        User newUser = new User(email, fullName, hashed, tenant);
+        
+        // Set role based on request, default to EMPLOYEE
+        try {
+            UserRole role = UserRole.valueOf(roleStr);
+            // Only allow EMPLOYEE or TENANT_ADMIN, not SUPER_ADMIN
+            if (role == UserRole.SUPER_ADMIN) {
+                role = UserRole.EMPLOYEE;
+            }
+            newUser.setRole(role);
+        } catch (IllegalArgumentException e) {
+            newUser.setRole(UserRole.EMPLOYEE);
+        }
+        
         userRepository.save(newUser);
 
         return ResponseEntity.ok(Map.of("message", "User invited successfully", "userId", newUser.getId()));
@@ -106,7 +120,21 @@ public class TenantAdminController {
                     Map<String, Object> map = new HashMap<>();
                     map.put("id", u.getId());
                     map.put("email", u.getEmail());
+                    map.put("fullName", u.getFullName());
                     map.put("role", u.getRole().name());
+                    // Calculate message count for this user (current month)
+                    YearMonth currentMonth = YearMonth.now();
+                    LocalDateTime startOfMonth = currentMonth.atDay(1).atStartOfDay();
+                    LocalDateTime endOfMonth = currentMonth.atEndOfMonth().atTime(23, 59, 59);
+                    long messageCount = messageRepository.findAll().stream()
+                            .filter(m -> {
+                                User msgUser = m.getConversation().getUser();
+                                return msgUser.getId().equals(u.getId()) &&
+                                       m.getCreatedAt().isAfter(startOfMonth) &&
+                                       m.getCreatedAt().isBefore(endOfMonth);
+                            })
+                            .count();
+                    map.put("messagesUsed", messageCount);
                     return map;
                 })
                 .collect(Collectors.toList());

@@ -39,7 +39,7 @@ const SafeMarkdown: React.FC<{ content: string }> = ({ content }) => {
     .map((line, idx) => {
       // Handle headers
       if (line.startsWith('# ')) {
-        return <h1 key={idx} style={{ marginTop: '1.5em', marginBottom: '0.75em', fontSize: '1.5em', fontWeight: 600, borderBottom: '1px solid rgba(148, 163, 184, 0.3)', paddingBottom: '0.5em' }}>{line.substring(2)}</h1>;
+        return <h1 key={idx} style={{ marginTop: '1.5em', marginBottom: '0.75em', fontSize: '1.5em', fontWeight: 600, paddingBottom: '0.5em' }}>{line.substring(2)}</h1>;
       }
       if (line.startsWith('## ')) {
         return <h2 key={idx} style={{ marginTop: '1.25em', marginBottom: '0.75em', fontSize: '1.3em', fontWeight: 600 }}>{line.substring(3)}</h2>;
@@ -49,7 +49,7 @@ const SafeMarkdown: React.FC<{ content: string }> = ({ content }) => {
       }
       // Handle horizontal rules
       if (line.trim() === '---' || line.trim() === '***') {
-        return <hr key={idx} style={{ border: 'none', borderTop: '1px solid rgba(148, 163, 184, 0.3)', margin: '0.5em 0' }} />;
+        return <hr key={idx} style={{ border: 'none', margin: '0.5em 0' }} />;
       }
       // Regular paragraphs
       if (line.trim()) {

@@ -8,7 +8,7 @@ import { componentTagger } from "lovable-tagger";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Resolve paths
+// Resolve paths - ensure we're using the directory where vite.config.ts is located
 const root = path.resolve(__dirname);
 const srcPath = path.resolve(root, "src");
 
@@ -21,10 +21,16 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
-    alias: {
-      "@": srcPath,
-    },
+    alias: [
+      {
+        find: /^@\/(.*)/,
+        replacement: path.resolve(srcPath, "$1"),
+      },
+    ],
     extensions: [".mjs", ".js", ".mts", ".ts", ".jsx", ".tsx", ".json"],
+  },
+  optimizeDeps: {
+    include: ["clsx", "tailwind-merge"],
   },
   build: {
     rollupOptions: {

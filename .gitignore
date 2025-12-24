@@ -1,0 +1,231 @@
+# Java / Maven
+**/target/
+**/.classpath
+**/.project
+**/.settings/
+**/.mvn/wrapper/maven-wrapper.jar
+# Note: Keep .mvn/ directory structure, only ignore the wrapper jar
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.iml
+# Exception: Keep mvnw and mvnw.cmd (Maven wrapper scripts)
+!**/mvnw
+!**/mvnw.cmd
+
+# Node.js / React / Vite
+**/node_modules/
+**/dist/
+**/build/
+**/.vite/
+**/.cache/
+**/coverage/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+**/*.so
+**/.Python
+**/venv/
+**/.venv/
+**/env/
+**/.env/
+**/ENV/
+**/env.bak/
+**/venv.bak/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.dmypy.json
+**/dmypy.json
+**/.pytype/
+**/cython_debug/
+**/*.egg-info/
+**/dist/
+**/build/
+**/eggs/
+**/.eggs/
+**/lib/
+**/lib64/
+**/parts/
+**/sdist/
+**/var/
+**/wheels/
+**/*.egg
+**/.coverage
+**/.coverage.*
+**/htmlcov/
+**/.tox/
+**/.cache
+**/nosetests.xml
+**/coverage.xml
+**/*.cover
+**/.hypothesis/
+**/.pytest_cache/
+**/cover/
+
+# Environment variables
+**/.env
+**/.env.local
+**/.env.*.local
+**/.env.development
+**/.env.production
+**/.env.test
+
+# IDE - IntelliJ IDEA
+**/.idea/
+**/*.iml
+**/*.iws
+**/*.ipr
+**/out/
+
+# IDE - Eclipse
+**/.classpath
+**/.project
+**/.settings/
+**/.metadata/
+**/bin/
+**/tmp/
+**/*.tmp
+**/*.bak
+**/*.swp
+**/*~.nib
+**/local.properties
+**/.loadpath
+**/.externalToolBuilders/
+**/.recommenders/
+
+# IDE - VS Code
+**/.vscode/
+**/.history/
+**/*.code-workspace
+
+# IDE - NetBeans
+**/nbproject/private/
+**/nbbuild/
+**/dist/
+**/nbdist/
+**/.nb-gradle/
+
+# OS Files
+**/.DS_Store
+**/.DS_Store?
+**/._*
+**/.Spotlight-V100
+**/.Trashes
+**/ehthumbs.db
+**/Thumbs.db
+**/Desktop.ini
+**/$RECYCLE.BIN/
+
+# Logs
+**/*.log
+**/logs/
+**/hs_err_pid*
+
+# Database
+**/*.db
+**/*.sqlite
+**/*.sqlite3
+
+# Temporary files
+**/*.tmp
+**/*.temp
+**/*.swp
+**/*.swo
+**/*~
+**/.fuse_hidden*
+
+# Build artifacts
+**/out/
+**/build/
+**/dist/
+**/target/
+
+# Package files
+**/*.jar
+**/*.war
+**/*.ear
+**/*.zip
+**/*.tar.gz
+**/*.rar
+
+# Application specific
+**/.gradle/
+**/gradle-app.setting
+**/!gradle-wrapper.jar
+**/.gradletasknamecache
+
+# Python specific for copilot
+copilot/.venv/
+copilot/__pycache__/
+copilot/**/*.pyc
+copilot/**/*.pyo
+copilot/**/*.pyd
+copilot/.Python
+copilot/pip-log.txt
+copilot/pip-delete-this-directory.txt
+
+# Java specific for orga
+orga/target/
+orga/.mvn/wrapper/maven-wrapper.jar
+orga/.classpath
+orga/.project
+orga/.settings/
+# Note: mvnw and mvnw.cmd should be committed (Maven wrapper)
+
+# Frontend specific
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.vite/
+frontend/.cache/
+
+# Auth API (if exists)
+auth-api/target/
+auth-api/.mvn/wrapper/maven-wrapper.jar
+# Note: mvnw and mvnw.cmd should be committed (Maven wrapper)
+
+# Chatbot API (if exists)
+chatbot-api/__pycache__/
+chatbot-api/.venv/
+chatbot-api/*.pyc
+
+# Docker
+**/.dockerignore
+**/docker-compose.override.yml
+
+# Backup files
+**/*.bak
+**/*.backup
+**/*.old
+
+# Test coverage
+**/coverage/
+**/.nyc_output/
+**/.coverage
+**/htmlcov/
+
+# Misc
+**/.sass-cache/
+**/connect.lock
+**/typings/
+**/.typings/
+**/.next/
+**/.nuxt/
+**/.vuepress/dist/
+**/.serverless/
+**/.fusebox/
+**/.dynamodb/
+**/.tern-port
+**/.tern-project
+

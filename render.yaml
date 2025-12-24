@@ -1,0 +1,61 @@
+# Render Blueprint for deploying both services
+# This file can be used with Render's Blueprint feature for easy deployment
+
+services:
+  # Backend Java Service (orga)
+  - type: web
+    name: orga-backend
+    env: docker
+    dockerfilePath: ./orga/Dockerfile
+    dockerContext: ./orga
+    plan: starter
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DATABASE_URL
+        sync: false  # Set this in Render dashboard from your PostgreSQL database
+      - key: DB_USERNAME
+        sync: false  # Set this in Render dashboard
+      - key: DB_PASSWORD
+        sync: false  # Set this in Render dashboard
+      - key: JWT_SECRET
+        generateValue: true  # Render will generate a secure secret
+      - key: JWT_EXPIRATION_MS
+        value: 86400000
+      - key: CHATBOT_BASE_URL
+        sync: false  # Set this to your copilot service URL after deployment
+      - key: DDL_AUTO
+        value: update
+      - key: SHOW_SQL
+        value: false
+      - key: FORMAT_SQL
+        value: false
+
+  # Python Chatbot Service (copilot)
+  - type: web
+    name: copilot-chatbot
+    env: docker
+    dockerfilePath: ./copilot/Dockerfile
+    dockerContext: ./copilot
+    plan: starter
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: ANTHROPIC_API_KEY
+        sync: false  # Set this in Render dashboard
+      - key: OPENAI_API_KEY
+        sync: false  # Set this in Render dashboard
+      - key: PINECONE_API_KEY
+        sync: false  # Set this in Render dashboard
+      - key: PINECONE_ENVIRONMENT
+        sync: false  # Set this in Render dashboard
+      - key: PINECONE_INDEX_NAME
+        sync: false  # Set this in Render dashboard
+
+  # PostgreSQL Database (optional - if you want Render to manage it)
+  - type: pspg
+    name: orga-database
+    plan: starter
+    databaseName: orga_final
+    user: orga_user
+

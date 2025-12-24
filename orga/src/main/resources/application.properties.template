@@ -1,0 +1,36 @@
+spring.application.name=orga
+
+# Server
+# ===============================
+server.port=${PORT:8080}
+
+# ===============================
+# PostgreSQL Database
+# ===============================
+# For Render: Set these as environment variables in Render dashboard
+spring.datasource.url=${DATABASE_URL:jdbc:postgresql://localhost:5432/orga-final}
+spring.datasource.username=${DB_USERNAME:postgres}
+spring.datasource.password=${DB_PASSWORD:}
+spring.datasource.driver-class-name=org.postgresql.Driver
+
+# ===============================
+# JPA / Hibernate
+# ===============================
+spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=${DDL_AUTO:update}
+spring.jpa.show-sql=${SHOW_SQL:false}
+spring.jpa.properties.hibernate.format_sql=${FORMAT_SQL:false}
+
+# ===============================
+# JWT Configuration
+# ===============================
+# For Render: Set JWT_SECRET as environment variable
+app.jwt.secret=${JWT_SECRET:lZB52evfOi3gpHJ2OmLnsD53W6hH9abX1gZvqRkfcJo=}
+app.jwt.expiration-ms=${JWT_EXPIRATION_MS:86400000}
+
+# ===============================
+# Chatbot Service URL
+# ===============================
+# For Render: Set CHATBOT_BASE_URL as environment variable (e.g., https://your-copilot-service.onrender.com)
+chatbot.base-url=${CHATBOT_BASE_URL:http://127.0.0.1:8000}
+
